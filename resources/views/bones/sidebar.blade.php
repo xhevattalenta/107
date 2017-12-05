@@ -11,10 +11,10 @@
         <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
         <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-hover-submenu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
           @php
-            $user = Voyager::model('User')->find(Auth::id());
-            $role = $user->role_id;
+            $user_role = Voyager::model('User')->find( Auth::id() )->role_id;
+            $role = Voyager::model('Role')->find($user_role)->name;
           @endphp
-          @if ($role == 1 || $role == 2)
+          @if ($role == 'admin' || $role == 'subadmin')
             <li class="nav-item start active open">
                 <a href="/" class="nav-link nav-toggle">
                     <i class="icon-home"></i>

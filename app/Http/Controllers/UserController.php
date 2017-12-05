@@ -38,7 +38,7 @@ class UserController extends Controller
          return Voyager::view('admin.home', compact('role', $role) );
        }
        else {
-         return Voyager::view('user.home', compact('role', $role) );
+         return Voyager::view('admin.home', compact('role', $role) );
        }
        //return Voyager::view('admin.home');
    }

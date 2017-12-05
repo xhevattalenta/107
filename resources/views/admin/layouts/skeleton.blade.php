@@ -21,20 +21,20 @@
 
     <body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-md">
         <!-- BEGIN HEADER -->
-        @include('admin.bones.header')
+        @include('bones.header')
         <!-- END HEADER -->
         <div class="clearfix"> </div>
         <!-- BEGIN CONTAINER -->
         <div class="page-container">
             <!-- BEGIN SIDEBAR -->
-            @include('admin.bones.sidebar')
+            @include('bones.sidebar')
             <!-- END SIDEBAR -->
             <!-- BEGIN CONTENT -->
             <div class="page-content-wrapper">
                 <!-- BEGIN CONTENT BODY -->
                 <div class="page-content">
                     <!-- BEGIN PAGE HEADER-->
-                    @include('admin.bones.pagetitlebar')
+                    @include('bones.pagetitlebar')
                     <!-- END PAGE HEADER-->
                     @yield('content')
                 </div>
@@ -45,7 +45,7 @@
         <!-- END CONTAINER -->
         <!-- BEGIN FOOTER -->
         <div class="page-footer">
-            @include('admin.bones.footer')
+            @include('bones.footer')
             <!-- END FOOTER -->
             <!-- BEGIN QUICK NAV -->
             {{-- @include('bones.quicknav') --}}
