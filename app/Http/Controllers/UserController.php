@@ -43,4 +43,19 @@ class UserController extends Controller
        //return Voyager::view('admin.home');
    }
 
+    public function profile()
+    {
+        return Voyager::view('voyager::profile');
+    }
+
+    public function lajmi($id)
+    {
+        return Voyager::view('voyager::user.lajmi', ["id"=>$id]);
+    }
+
+    public function anetaret()
+    {
+        return Voyager::view('voyager::user.anetaret');
+    }
+
 }

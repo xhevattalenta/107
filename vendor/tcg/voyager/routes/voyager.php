@@ -34,6 +34,8 @@ Route::group(['as' => 'voyager.'], function () {
 
         /*CUSTOM START*/
         Route::get('/', ['uses' => 'UserController@index',   'as' => 'dashboard']);
+        Route::get('lajmi/{id}', ['uses' => $namespacePrefix.'UserController@lajmi',  'as' => 'lajmi']);
+        Route::get('anetaret', ['uses' => $namespacePrefix.'UserController@anetaret', 'as' => 'anetaret']);
         /*CUSTOM END*/
 
         try {
