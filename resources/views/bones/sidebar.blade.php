@@ -24,58 +24,26 @@
                 </a>
             </li>
             <li class="nav-item  ">
-              <a href="/kryetaret" class="nav-link nav-toggle">
+              <a href="/anetaret" class="nav-link nav-toggle">
                   <i class="icon-users"></i>
-                  <span class="title">Kryetarët</span>
-                  <span class="arrow"></span>
-              </a>
-            </li>
-            <li class="nav-item  ">
-              <a href="javascript:;" class="nav-link nav-toggle">
-                  <i class="icon-diamond"></i>
-                  <span class="title">Anëtarsim</span>
+                  <span class="title">Anëtarët</span>
                   <span class="arrow"></span>
               </a>
               <ul class="sub-menu">
-                  <li class="nav-item  ">
-                      <a href="/lista" class="nav-link ">
-                          <span class="title">Lista e anëtarëve</span>
-                      </a>
-                  </li>
-                  <li class="nav-item  ">
-                      <a href="/lista/create" class="nav-link ">
-                          <span class="title">Shto anëtarë</span>
-                      </a>
+                  <li class="nav-item ">
+                      <a href="/anetar/create" class="nav-link "> Shto te ri </a>
                   </li>
               </ul>
             </li>
             <li class="nav-item  ">
-              <a href="/keshillat" class="nav-link nav-toggle">
-                  <i class="icon-users"></i>
-                  <span class="title">Këshillat vendor</span>
+              <a href="/financat" class="nav-link nav-toggle">
+                  <i class="icon-diamond"></i>
+                  <span class="title">Financat</span>
                   <span class="arrow"></span>
               </a>
             </li>
           @else
-            <li class="nav-item  ">
-              <a href="javascript:;" class="nav-link nav-toggle">
-                  <i class="icon-diamond"></i>
-                  <span class="title">Anëtarsim</span>
-                  <span class="arrow"></span>
-              </a>
-              <ul class="sub-menu">
-                  <li class="nav-item  ">
-                      <a href="/lista" class="nav-link ">
-                          <span class="title">Lista e anëtarëve</span>
-                      </a>
-                  </li>
-                  <li class="nav-item  ">
-                      <a href="/lista/create" class="nav-link ">
-                          <span class="title">Shto anëtarë</span>
-                      </a>
-                  </li>
-              </ul>
-            </li>
+            NDRZSHO
           @endif
         </ul>
         <!-- END SIDEBAR MENU -->

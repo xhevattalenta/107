@@ -31,7 +31,7 @@ echo '</pre>';
                 <div class="mt-widget-2">
                     <div class="mt-head" style="background-image: url( {{ Voyager::image($post->image) }} );">
                         <div class="mt-head-label">
-                            <button type="button" class="btn btn-{{ Voyager::model('User')::find($post->category_id)->first()->btn_type }}">{{ Voyager::model('User')::find($post->category_id)->first()->name }}</button>
+                            <button type="button" class="btn btn-{{ Voyager::model('Category')::find($post->category_id)->first()->btn_type }}">{{ Voyager::model('Category')::find($post->category_id)->first()->name }}</button>
                         </div>
                         <div class="mt-head-user">
                             <div class="mt-head-user-img">

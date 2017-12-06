@@ -34,8 +34,12 @@ Route::group(['as' => 'voyager.'], function () {
 
         /*CUSTOM START*/
         Route::get('/', ['uses' => 'UserController@index',   'as' => 'dashboard']);
-        Route::get('lajmi/{id}', ['uses' => $namespacePrefix.'UserController@lajmi',  'as' => 'lajmi']);
-        Route::get('anetaret', ['uses' => $namespacePrefix.'UserController@anetaret', 'as' => 'anetaret']);
+        Route::get('lajmi/{id}', ['uses' => 'UserController@lajmi',  'as' => 'lajmi']);
+        Route::get('anetaret', ['uses' => 'UserController@anetaret', 'as' => 'anetaret']);
+        Route::get('anetari/{id}', ['uses' => 'UserController@anetari', 'as' => 'anetari']);
+        Route::get('financat', ['uses' => 'UserController@financat', 'as' => 'financat']);
+        Route::resource('financa', 'InputController');
+        Route::resource('anetar', 'MemberController');
         /*CUSTOM END*/
 
         try {

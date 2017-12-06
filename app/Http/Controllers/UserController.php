@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use TCG\Voyager\Facades\Voyager;
+use App\Member;
 
 class UserController extends Controller
 {
@@ -50,12 +51,20 @@ class UserController extends Controller
 
     public function lajmi($id)
     {
-        return Voyager::view('voyager::user.lajmi', ["id"=>$id]);
+        return Voyager::view('user.lajmi', ["id"=>$id]);
     }
 
     public function anetaret()
     {
-        return Voyager::view('voyager::user.anetaret');
+        return Voyager::view('user.anetaret');
+    }
+    public function anetari($id)
+    {
+        return Voyager::view('user.anetari', ['m' => Member::where('id', $id)->firstOrFail() ]);
+    }
+    public function financat()
+    {
+        return Voyager::view('user.financat');
     }
 
 }
