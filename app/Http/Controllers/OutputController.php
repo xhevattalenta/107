@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Facades\Storage;
-use App\Input;
+use App\Output;
 
-class InputController extends Controller
+class OutputController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,7 +26,7 @@ class InputController extends Controller
      */
     public function create()
     {
-        return view('finance.hyrje.create');
+        return view('finance.dalje.create');
     }
 
     /**
@@ -37,16 +37,14 @@ class InputController extends Controller
      */
     public function store(Request $request)
     {
-        $m = new Input;
-        $m->member_id = request('member');
-        $m->kontributi = request('kontributi');
+        $m = new Output;
         $m->details = request('detaje');
         $m->vlera = request('vlera');
         $m->data = date("Y-m-d H:i:s", strtotime( request('data') ));
         $m->save();
 
-        Session::flash('flash_message', 'Hyrja u ruajt me sukses.');
-        return View('finance.hyrje.create', compact('m', $m) );
+        Session::flash('flash_message', 'Harxhimi u ruajt me sukses.');
+        return View('finance.dalje.create', compact('m', $m) );
     }
 
     /**

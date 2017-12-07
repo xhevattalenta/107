@@ -63,7 +63,7 @@ $members = Member::all();
                               @endif
                               <div class="ribbon-content">
                                 <div class="mt-icon">
-                                    <a href="kryetaret/edit/{{$member->id}}">
+                                    <a href="#!">
                                         <i class="icon-plus"></i>
                                     </a>
                                 </div>
@@ -82,7 +82,7 @@ $members = Member::all();
                                         @endif
                                     <div class="mt-stats">
                                         <div class="btn-group btn-group btn-group-justified">
-                                            <a href="anetari/{{$member->id}}" class="btn font-{{ ($member->anetar == 1) ? 'black' : 'red' }}">
+                                            <a href="anetar/{{$member->id}}" class="btn font-{{ ($member->anetar == 1) ? 'black' : 'red' }}">
                                                 <i class="icon-user"></i>Detaje
                                             </a>
                                         </div>

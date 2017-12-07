@@ -4,14 +4,7 @@ use TCG\Voyager\Models\User;
 //$posts = TCG\Voyager\Models\Post::all();
 //$posts = Voyager::model('Post')::all();
 $posts = Voyager::model('Post')::orderBy('created_at', 'desc')->get();
-echo '<pre>';
-//print_r($posts);
-echo '</pre>';
 @endphp
-
-{{-- $posts = Voyager::model('Post')::find(1)->get() --}}
-
-
 
 <div class="portlet light portlet-fit ">
     <div class="portlet-title">
@@ -31,7 +24,7 @@ echo '</pre>';
                 <div class="mt-widget-2">
                     <div class="mt-head" style="background-image: url( {{ Voyager::image($post->image) }} );">
                         <div class="mt-head-label">
-                            <button type="button" class="btn btn-{{ Voyager::model('Category')::find($post->category_id)->first()->btn_type }}">{{ Voyager::model('Category')::find($post->category_id)->first()->name }}</button>
+                            <button type="button" class="btn btn-{{ $post->category->btn_type }}">{{ $post->category->name }}</button>
                         </div>
                         <div class="mt-head-user">
                             <div class="mt-head-user-img">

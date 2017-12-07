@@ -30,32 +30,35 @@ if ((substr(Auth::user()->avatar, 0, 7) == 'http://') || (substr(Auth::user()->a
         <!-- DOC: Remove "hide" class to enable the page header actions -->
         <div class="page-actions">
             <div class="btn-group">
-                <button type="button" class="btn btn-circle btn-outline red dropdown-toggle" data-toggle="dropdown">
-                    <i class="fa fa-plus"></i>&nbsp;
-                    <span class="hidden-sm hidden-xs">Shto&nbsp;</span>&nbsp;
-                    <i class="fa fa-angle-down"></i>
-                </button>
-                <ul class="dropdown-menu" role="menu">
                     @php
                       $user_role = Voyager::model('User')->find( Auth::id() )->role_id;
                       $role = Voyager::model('Role')->find($user_role)->name;
                     @endphp
                     @if ($role == 'admin' || $role == 'subadmin')
-                      <li>
-                          <a href="/kryetaret/create">
-                              <i class="icon-users"></i> Kryetar të ri </a>
-                      </li>
-                      <li>
-                          <a href="/lista/create">
-                              <i class="icon-user"></i> Anëtar të ri </a>
-                      </li>
-                    @else
-                      <li>
-                          <a href="/lista/create">
-                              <i class="icon-user"></i> Anëtar të ri </a>
-                      </li>
+                      <button type="button" class="btn btn-circle btn-outline red dropdown-toggle" data-toggle="dropdown">
+                          <i class="fa fa-plus"></i>&nbsp;
+                          <span class="hidden-sm hidden-xs">Shto&nbsp;</span>&nbsp;
+                          <i class="fa fa-angle-down"></i>
+                      </button>
+                      <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href="/hyrje/create">
+                                <i class="icon-user"></i> Anëtar të ri </a>
+                        </li>
+                        <li>
+                            <a href="/hyrje/create">
+                                <i class="icon-briefcase"></i> Hyrje të re </a>
+                        </li>
+                        <li>
+                            <a href="/dalje/create">
+                                <i class="icon-basket"></i> Harxhim të ri </a>
+                        </li>
+                        <li>
+                            <a href="/posts/create">
+                                <i class="icon-feed"></i> Lajm të ri </a>
+                        </li>
+                      </ul>
                     @endif
-                </ul>
             </div>
         </div>
         <!-- END PAGE ACTIONS -->
@@ -79,10 +82,6 @@ if ((substr(Auth::user()->avatar, 0, 7) == 'http://') || (substr(Auth::user()->a
                                       <h5>{{ Auth::user()->name }}</h5>
                                       <h6>{{ Auth::user()->email }}</h6>
                                   </div> </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('voyager.profile') }}">
-                                    <i class="icon-user"></i> Profili </a>
                             </li>
                             <li class="divider"> </li>
                             <li>

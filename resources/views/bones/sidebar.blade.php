@@ -37,13 +37,60 @@
             </li>
             <li class="nav-item  ">
               <a href="/financat" class="nav-link nav-toggle">
-                  <i class="icon-diamond"></i>
+                  <i class="icon-bar-chart"></i>
                   <span class="title">Financat</span>
                   <span class="arrow"></span>
               </a>
             </li>
+            <li class="nav-item  ">
+              <a href="/hyrje/create" class="nav-link nav-toggle">
+                  <i class="icon-briefcase"></i>
+                  <span class="title">Shto Hyrje</span>
+                  <span class="arrow"></span>
+              </a>
+            </li>
+            <li class="nav-item  ">
+              <a href="/dalje/create" class="nav-link nav-toggle">
+                  <i class="icon-basket"></i>
+                  <span class="title">Shto Harxhim</span>
+                  <span class="arrow"></span>
+              </a>
+            </li>
+            <li class="nav-item  ">
+              <a href="/posts" class="nav-link nav-toggle">
+                  <i class="icon-feed"></i>
+                  <span class="title">Lajmet</span>
+                  <span class="arrow"></span>
+              </a>
+              <ul class="sub-menu">
+                  <li class="nav-item ">
+                      <a href="/posts/create" class="nav-link "> Shto te ri </a>
+                  </li>
+              </ul>
+            </li>
           @else
-            NDRZSHO
+            <li class="nav-item start active open">
+                <a href="/" class="nav-link nav-toggle">
+                    <i class="icon-home"></i>
+                    <span class="title">Ballina</span>
+                    <span class="selected"></span>
+                    <span class="arrow open"></span>
+                </a>
+            </li>
+            <li class="nav-item  ">
+              <a href="/anetaret" class="nav-link nav-toggle">
+                  <i class="icon-users"></i>
+                  <span class="title">Anëtarët</span>
+                  <span class="arrow"></span>
+              </a>
+            </li>
+            <li class="nav-item  ">
+              <a href="/financat" class="nav-link nav-toggle">
+                  <i class="icon-bar-chart"></i>
+                  <span class="title">Financat</span>
+                  <span class="arrow"></span>
+              </a>
+            </li>
           @endif
         </ul>
         <!-- END SIDEBAR MENU -->

@@ -56,12 +56,9 @@ class UserController extends Controller
 
     public function anetaret()
     {
-        return Voyager::view('user.anetaret');
+        return Voyager::view('member.anetaret');
     }
-    public function anetari($id)
-    {
-        return Voyager::view('user.anetari', ['m' => Member::where('id', $id)->firstOrFail() ]);
-    }
+
     public function financat()
     {
         return Voyager::view('user.financat');

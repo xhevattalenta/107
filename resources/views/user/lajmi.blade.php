@@ -1,15 +1,6 @@
 @php
 use TCG\Voyager\Models\Post;
-
-
-
-//$posts = TCG\Voyager\Models\Post::all();
 $post = Voyager::model('Post')::find( $id );
-/*
-echo "<pre>";
-print_r($post);
-echo "</pre>";
-*/
 @endphp
 @extends('admin.layouts.skeleton')
 
@@ -34,16 +25,6 @@ echo "</pre>";
 @section('page-breadcrumb-title', 'Ballina')
 
 @section('content')
-  {{--<div class="row">
-		@foreach($posts as $post)
-			<div class="col-md-3">
-				<a href="/post/{{ $post->id }}">
-					<img src="{{ Voyager::image( $post->image ) }}" style="width:100%">
-					<span>{{ $post->title }}</span>
-				</a>
-			</div>
-		@endforeach
-  </div>--}}
   <div class="blog-page blog-content-2">
       <div class="row">
           <div class="col-lg-12">

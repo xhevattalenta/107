@@ -63,7 +63,7 @@ class MemberController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('member.anetari', ['m' => Member::where('id', $id)->firstOrFail() ]);
     }
 
     /**

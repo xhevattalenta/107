@@ -10,3 +10,6 @@
 .mt-widget-1 .mt-img {
   margin: 0 0 30px;
 }
+.btn:not(.md-skip):not(.bs-select-all):not(.bs-deselect-all).btn-sm {
+  font-size: 16px;
+}
