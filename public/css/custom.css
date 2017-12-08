@@ -13,3 +13,7 @@
 .btn:not(.md-skip):not(.bs-select-all):not(.bs-deselect-all).btn-sm {
   font-size: 16px;
 }
+.mt-widget-2 .mt-head .mt-head-user .mt-head-user-info .mt-user-name,
+.mt-widget-2 .mt-head .mt-head-user .mt-head-user-info .mt-user-time {
+  background-color: #00000075;
+}

@@ -1,6 +1,7 @@
 @php
-//use App\Branch;
-//$branches = Branch::all();
+use App\Member;
+use App\Input;
+$member = $m;
 @endphp
 
 @extends('admin.layouts.skeleton')
@@ -34,13 +35,13 @@
             <div class="portlet-title">
                 <div class="caption">
                     <i class="icon-bubble font-dark hide"></i>
-                    <span class="caption-subject font-hide bold uppercase">Shto Anëtarë</span>
+                    <span class="caption-subject font-hide bold uppercase">Ndrysho Anëtarin</span>
                 </div>
             </div>
             <div class="portlet-body">
                 <div class="row">
                   <!-- BEGIN FORM-->
-                  <form action="/anetar" method="post" class="form-horizontal form-bordered" id="form_shto_kryetar" enctype="multipart/form-data">
+                  <form action="/anetar/{{$member->id}}" method="PUT" class="form-horizontal form-bordered" id="form_shto_kryetar" enctype="multipart/form-data">
                      {{ csrf_field() }}
                       <div class="form-body">
                           <div class="form-group">
@@ -50,7 +51,7 @@
                                     <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
                                     </span>
-                                    <input type="text" name="name" class="form-control" placeholder="Emri dhe Mbiemri" required>
+                                    <input type="text" name="name" class="form-control" placeholder="Emri dhe Mbiemri" value="{{ $member->name }}" required>
                                 </div>
                               </div>
                           </div>
@@ -61,7 +62,7 @@
                                     <span class="input-group-addon">
                                         <i class="fa fa-envelope"></i>
                                     </span>
-                                    <input type="text" name="tel" class="form-control" placeholder="Telefoni">
+                                    <input type="text" name="tel" class="form-control" placeholder="Telefoni" value="{{ $member->tel }}">
                                 </div>
                               </div>
                           </div>
@@ -79,7 +80,7 @@
                               <div class="col-md-9">
                                   <div class="fileinput fileinput-new" data-provides="fileinput">
                                       <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
-                                          <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" /> </div>
+                                          <img src="{!! Voyager::image( $member->image) !!}" alt="" /> </div>
                                       <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
                                       <div>
                                           <span class="btn default btn-file">
@@ -95,8 +96,7 @@
                       <div class="form-actions">
                           <div class="row">
                               <div class="col-md-offset-3 col-md-9">
-                                  <button type="submit" class="btn green">Ruaj</button>
-                                  <button type="reset" class="btn default">Reseto</button>
+                                  <button type="submit" class="btn green">Ndrysho</button>
                               </div>
                           </div>
                       </div>

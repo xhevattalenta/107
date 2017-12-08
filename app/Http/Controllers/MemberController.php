@@ -52,7 +52,7 @@ class MemberController extends Controller
 
 
         Session::flash('flash_message', 'Anëtari u ruajt me sukses.');
-        return View('user.anetaret', compact('m', $m) );
+        return View('member.anetaret', compact('m', $m) );
     }
 
     /**
@@ -74,7 +74,7 @@ class MemberController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('member.edit', ['m' => Member::where('id', $id)->firstOrFail() ]);
     }
 
     /**
@@ -86,7 +86,7 @@ class MemberController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return "OK";
     }
 
     /**
