@@ -63,7 +63,7 @@ $members = Member::all();
                               @endif
                               <div class="ribbon-content">
                                 <div class="mt-icon">
-                                    <a href="/anetar/{{$member->id}}/edit">
+                                    <a href="/anetar/{{$member->id}}/edit"> 
                                         <i class="icon-plus"></i>
                                     </a>
                                 </div>

@@ -23,10 +23,10 @@ $member = $m;
   <!-- END PAGE LEVEL PLUGINS -->
 @endsection
 
-@section('title', 'Kryetarët')
-@section('page-title', 'Kryetarët')
-@section('page-subtitle', 'Kryetarët e degëve')
-@section('page-breadcrumb-title', 'Kryetarët')
+@section('title', 'Anëtarët')
+@section('page-title', 'Anëtarët')
+@section('page-subtitle', 'Anëtarët e lagjes')
+@section('page-breadcrumb-title', 'Anëtarët')
 
 @section('content')
   <div class="row">
@@ -41,8 +41,9 @@ $member = $m;
             <div class="portlet-body">
                 <div class="row">
                   <!-- BEGIN FORM-->
-                  <form action="/anetar/{{$member->id}}" method="PUT" class="form-horizontal form-bordered" id="form_shto_kryetar" enctype="multipart/form-data">
+                  <form action="/anetar/{{$member->id}}" method="POST" class="form-horizontal form-bordered" id="form_shto_kryetar" enctype="multipart/form-data">
                      {{ csrf_field() }}
+                     <input name="_method" type="hidden" value="PUT">
                       <div class="form-body">
                           <div class="form-group">
                               <label class="control-label col-md-3">Emri dhe Mbiemri</label>

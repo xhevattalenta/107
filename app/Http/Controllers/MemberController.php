@@ -86,7 +86,22 @@ class MemberController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return "OK";
+        $m = new Member;
+        $m = Member::find($id)->firstOrFail();
+        if (is_null(request('avatar'))) {
+            $m->image = config('voyager.user.default_avatar', 'users/default.png');
+        }
+        else {
+          $m->image = $this->personi_avatar( request('avatar') );
+        }
+        $m->name = request('name');
+        $m->tel = request('tel');
+        $m->anetar = (request('anetar') == '1') ? 1:0;
+        $m->save();
+
+
+        Session::flash('flash_message', 'Anëtari u ndryshua me sukses.');
+        return View('member.anetaret', compact('m', $m) );
     }
 
     /**

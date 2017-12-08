@@ -22,10 +22,10 @@
   <!-- END PAGE LEVEL PLUGINS -->
 @endsection
 
-@section('title', 'Kryetarët')
-@section('page-title', 'Kryetarët')
-@section('page-subtitle', 'Kryetarët e degëve')
-@section('page-breadcrumb-title', 'Kryetarët')
+@section('title', 'Anëtarët')
+@section('page-title', 'Anëtarët')
+@section('page-subtitle', 'Anëtarët e lagjes')
+@section('page-breadcrumb-title', 'Anëtarët')
 
 @section('content')
   <div class="row">
