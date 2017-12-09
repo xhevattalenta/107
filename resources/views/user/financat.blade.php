@@ -201,22 +201,22 @@ $total_arka   = $total_input - $total_output;
                                     <th colspan="2"> ANËTARI </th>
                                     <th> KONTRIBUTI </th>
                                     <th> DETAJET </th>
-                                    <th> VLERA </th>
-                                    <th> DATA </th>
+                                    <th style="min-width:90px;"> VLERA </th>
+                                    <th style="min-width:90px;"> DATA </th>
                                 </tr>
                             </thead>
                             @foreach ($inputs as $key => $input)
                               @if ( date( 'Y', strtotime( $input->data ) ) == $year)
-                                <?php $member = Member::find($input->member_id)->firstOrFail() ?>
+                                <?php $member = Member::where('id', $input->member_id)->firstOrFail() ?>
                                 <tr>
                                     <td class="fit">
                                         <img class="user-pic" src="{{ Voyager::image( $member->image ) }}"> </td>
                                     <td>
-                                        <a href="javascript:;" class="primary-link">{{ $member->name }}</a>
+                                        <a href="/anetar/{{ $member->id }}" class="primary-link">{{ $member->name }}</a>
                                     </td>
                                     <td> {{ $input->kontributi }} </td>
                                     <td> {{ $input->details }} </td>
-                                    <td> {{ $input->vlera }} den </td>
+                                    <td>{{ ($input->vlera == '') ? '-' : $input->vlera . ' den' }}</td>
                                     <td>
                                         <span class="bold theme-font"> {{ date("d-m-Y", strtotime($input->data) ) }} </span>
                                     </td>
@@ -314,7 +314,7 @@ $total_arka   = $total_input - $total_output;
     var EcommerceDashboard = function() {
 
     function showTooltip(x, y, labelX, labelY) {
-        $('<div id="tooltip" class="chart-tooltip">' + (labelY.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')) + 'USD<\/div>').css({
+        $('<div id="tooltip" class="chart-tooltip">' + (labelY.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')) + ' DENAR<\/div>').css({
             position: 'absolute',
             display: 'none',
             top: y - 40,

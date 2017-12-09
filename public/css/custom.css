@@ -17,3 +17,11 @@
 .mt-widget-2 .mt-head .mt-head-user .mt-head-user-info .mt-user-time {
   background-color: #00000075;
 }
+.mt-widget-1 .mt-img>img {
+      width: 80px;
+      height: 80px;
+}
+.table.table-light>tbody>tr>td .user-pic {
+  width: 30px;
+  height: 30px;
+}
