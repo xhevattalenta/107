@@ -64,6 +64,9 @@ $total_arka   = $total_input - $total_output;
 @section('page-breadcrumb-title', 'Ballina')
 
 @section('content')
+  @if(Session::has('flash_message'))
+    <p class="alert alert-info">{{ Session::get('flash_message') }}</p>
+  @endif
   <div class="row">
     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10">
         <div class="dashboard-stat blue">
@@ -203,6 +206,7 @@ $total_arka   = $total_input - $total_output;
                                     <th> DETAJET </th>
                                     <th style="min-width:90px;"> VLERA </th>
                                     <th style="min-width:90px;"> DATA </th>
+                                    <th style="min-width:100px;"> NDRYSHIME </th>
                                 </tr>
                             </thead>
                             @foreach ($inputs as $key => $input)
@@ -219,6 +223,17 @@ $total_arka   = $total_input - $total_output;
                                     <td>{{ ($input->vlera == '') ? '-' : $input->vlera . ' den' }}</td>
                                     <td>
                                         <span class="bold theme-font"> {{ date("d-m-Y", strtotime($input->data) ) }} </span>
+                                    </td>
+                                    <td>
+                                      <a href="/hyrje/{{$input->id}}/edit" class="btn btn-icon-only blue" style="float: left;">
+                                          <i class="fa fa-edit"></i>
+                                      </a>
+                                      <form action="/hyrje/{{$input->id}}" method="post">
+                                        {{ csrf_field() }}
+                                        <input name="_method" type="hidden" value="DELETE">
+                                        <button type="submit" class="btn btn-icon-only red"><i class="fa fa-times"></i></button>
+                                      </form>
+
                                     </td>
                                 </tr>
                               @endif
@@ -273,8 +288,9 @@ $total_arka   = $total_input - $total_output;
                             <thead>
                                 <tr class="uppercase">
                                     <th> DETAJET </th>
-                                    <th> VLERA </th>
-                                    <th> DATA </th>
+                                    <th style="min-width:90px;"> VLERA </th>
+                                    <th style="min-width:90px;"> DATA </th>
+                                    <th style="min-width:100px;"> NDRYSHIME </th>
                                 </tr>
                             </thead>
                             @foreach ($outputs as $key => $output)
@@ -284,6 +300,17 @@ $total_arka   = $total_input - $total_output;
                                     <td width="25%"> {{ $output->vlera }} den </td>
                                     <td width="25%">
                                         <span class="bold theme-font"> {{ date("d-m-Y", strtotime($output->data) ) }} </span>
+                                    </td>
+                                    <td>
+                                      <a href="/dalje/{{$output->id}}/edit" class="btn btn-icon-only blue" style="float: left;">
+                                          <i class="fa fa-edit"></i>
+                                      </a>
+                                      <form action="/dalje/{{$output->id}}" method="post">
+                                        {{ csrf_field() }}
+                                        <input name="_method" type="hidden" value="DELETE">
+                                        <button type="submit" class="btn btn-icon-only red"><i class="fa fa-times"></i></button>
+                                      </form>
+
                                     </td>
                                 </tr>
                               @endif

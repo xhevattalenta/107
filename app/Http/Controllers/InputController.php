@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Facades\Storage;
 use App\Input;
+use App\Member;
 
 class InputController extends Controller
 {
@@ -37,13 +38,13 @@ class InputController extends Controller
      */
     public function store(Request $request)
     {
-        $m = new Input;
-        $m->member_id = request('member');
-        $m->kontributi = request('kontributi');
-        $m->details = request('detaje');
-        $m->vlera = request('vlera');
-        $m->data = date("Y-m-d H:i:s", strtotime( request('data') ));
-        $m->save();
+        $i = new Input;
+        $i->member_id = request('member');
+        $i->kontributi = request('kontributi');
+        $i->details = request('detaje');
+        $i->vlera = request('vlera');
+        $i->data = date("Y-m-d H:i:s", strtotime( request('data') ));
+        $i->save();
 
         Session::flash('flash_message', 'Hyrja u ruajt me sukses.');
         return View('finance.hyrje.create', compact('m', $m) );
@@ -68,7 +69,7 @@ class InputController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('finance.hyrje.edit', ['i' => Input::where('id', $id)->firstOrFail() ]);
     }
 
     /**
@@ -80,7 +81,16 @@ class InputController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $i = Input::where('id', $id)->firstOrFail();
+        //$m->member_id = $id;
+        $i->kontributi = request('kontributi');
+        $i->details = request('detaje');
+        $i->vlera = request('vlera');
+        $i->data = date("Y-m-d H:i:s", strtotime( request('data') ));
+        $i->save();
+
+        Session::flash('flash_message', 'Hyrja u ndryshua me sukses.');
+        return redirect('financat');
     }
 
     /**
@@ -91,6 +101,9 @@ class InputController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Input::findorFail($id)->delete();
+
+        Session::flash('flash_message', 'Hyrja u fshij me sukses.');
+        return redirect('financat');
     }
 }

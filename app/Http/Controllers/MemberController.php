@@ -86,8 +86,7 @@ class MemberController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $m = new Member;
-        $m = Member::find($id)->firstOrFail();
+        $m = Member::where('id', $id)->firstOrFail();
         if (is_null(request('avatar'))) {
             $m->image = config('voyager.user.default_avatar', 'users/default.png');
         }

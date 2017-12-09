@@ -37,14 +37,14 @@ class OutputController extends Controller
      */
     public function store(Request $request)
     {
-        $m = new Output;
-        $m->details = request('detaje');
-        $m->vlera = request('vlera');
-        $m->data = date("Y-m-d H:i:s", strtotime( request('data') ));
-        $m->save();
+        $o = new Output;
+        $o->details = request('detaje');
+        $o->vlera = request('vlera');
+        $o->data = date("Y-m-d H:i:s", strtotime( request('data') ));
+        $o->save();
 
         Session::flash('flash_message', 'Harxhimi u ruajt me sukses.');
-        return View('finance.dalje.create', compact('m', $m) );
+        return View('finance.dalje.create', compact('m', $o) );
     }
 
     /**
@@ -66,7 +66,7 @@ class OutputController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('finance.dalje.edit', ['o' => Output::where('id', $id)->firstOrFail() ]);
     }
 
     /**
@@ -78,7 +78,14 @@ class OutputController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $o = Output::where('id', $id)->firstOrFail();
+        $o->details = request('detaje');
+        $o->vlera = request('vlera');
+        $o->data = date("Y-m-d H:i:s", strtotime( request('data') ));
+        $o->save();
+
+        Session::flash('flash_message', 'Harxhimi u ndryshua me sukses.');
+        return redirect('financat');
     }
 
     /**
@@ -89,6 +96,9 @@ class OutputController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Output::findorFail($id)->delete();
+
+        Session::flash('flash_message', 'Harxhimimi u fshij me sukses.');
+        return redirect('financat');
     }
 }

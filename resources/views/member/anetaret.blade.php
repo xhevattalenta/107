@@ -62,11 +62,17 @@ $members = Member::all();
                                 </div>
                               @endif
                               <div class="ribbon-content">
-                                <div class="mt-icon">
-                                    <a href="/anetar/{{$member->id}}/edit"> 
-                                        <i class="icon-plus"></i>
-                                    </a>
-                                </div>
+                                @php
+                                  $user_role = Voyager::model('User')->find( Auth::id() )->role_id;
+                                  $role = Voyager::model('Role')->find($user_role)->name;
+                                @endphp
+                                @if ($role == 'admin' || $role == 'subadmin')
+                                  <div class="mt-icon">
+                                      <a href="/anetar/{{$member->id}}/edit">
+                                          <i class="icon-plus"></i>
+                                      </a>
+                                  </div>
+                                @endif
                                 <div class="mt-img">
                                     <img src="{{ Voyager::image( $member->image ) }}">
                                 </div>

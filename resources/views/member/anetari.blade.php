@@ -147,6 +147,7 @@ $input_data = array(
                                                     <th> Përshkrimi </th>
                                                     <th> Vlera </th>
                                                     <th> Data </th>
+                                                    <th style="min-width:100px;"> NDRYSHIME </th>
                                                 </tr>
                                             </thead>
                                             @foreach ($inputs as $key => $input)
@@ -154,8 +155,19 @@ $input_data = array(
                                                 <tr>
                                                     <td>{{ $input->kontributi }}</td>
                                                     <td>{{ $input->details }}</td>
-                                                    <td>{{ ($input->vlera == '') ? 0 : $input->vlera }} den</td>
-                                                    <td>{{ $input->data }}</td>
+                                                    <td>{{ ($input->vlera == '') ? '-' : $input->vlera . ' den' }}</td>
+                                                    <td>{{ date("d-m-Y", strtotime($input->data) ) }}</td>
+                                                    <td>
+                                                      <a href="/hyrje/{{$input->id}}/edit" class="btn btn-icon-only blue" style="float: left;">
+                                                          <i class="fa fa-edit"></i>
+                                                      </a>
+                                                      <form action="/hyrje/{{$input->id}}" method="post">
+                                                        {{ csrf_field() }}
+                                                        <input name="_method" type="hidden" value="DELETE">
+                                                        <button type="submit" class="btn btn-icon-only red"><i class="fa fa-times"></i></button>
+                                                      </form>
+
+                                                    </td>
                                                 </tr>
                                               @endif
                                             @endforeach
