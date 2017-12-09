@@ -29,3 +29,7 @@
   width: 36px;
   height: 36px;
 }
+.flexrow {
+  display: flex;
+  flex-wrap: wrap;
+}

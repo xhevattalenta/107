@@ -1,6 +1,7 @@
 @php
 use App\Member;
-$members = Member::all();
+//$members = Member::all();
+$members = Member::orderByDesc('anetar')->get();
 @endphp
 
 @extends('admin.layouts.skeleton')
@@ -48,12 +49,12 @@ $members = Member::all();
                 </div>
             </div>
             <div class="portlet-body">
-                <div class="row">
+                <div class="row flexrow">
                     @foreach($members as $member)
                       <div class="col-md-2">
                           <div class="mt-widget-1 mt-element-ribbon">
                               @if ( $member->anetar == 1 )
-                                <div class="ribbon ribbon-vertical-left ribbon-color-primary uppercase">
+                                <div class="ribbon ribbon-vertical-left ribbon-color-warning uppercase">
                                     <i class="fa fa-user"></i>
                                 </div>
                               @else
@@ -68,9 +69,15 @@ $members = Member::all();
                                 @endphp
                                 @if ($role == 'admin' || $role == 'subadmin')
                                   <div class="mt-icon">
-                                      <a href="/anetar/{{$member->id}}/edit">
-                                          <i class="icon-plus"></i>
+                                      <a href="/anetar/{{$member->id}}/edit" class="btn btn-icon-only blue" style="float: left;">
+                                          <i class="fa fa-edit"></i>
                                       </a>
+                                      <form action="/anetar/{{$member->id}}" method="post" style="float: left;">
+                                        {{ csrf_field() }}
+                                        <input name="_method" type="hidden" value="DELETE">
+                                        <button type="submit" class="btn btn-icon-only red"><i class="icon-trash"></i></button>
+                                      </form>
+
                                   </div>
                                 @endif
                                 <div class="mt-img">

@@ -10,7 +10,7 @@ if ((substr(Auth::user()->avatar, 0, 7) == 'http://') || (substr(Auth::user()->a
     <div class="page-header-inner ">
         <!-- BEGIN LOGO -->
         <div class="page-logo">
-            <a href="./">
+            <a href="/">
                 <?php $admin_logo_img = Voyager::setting('admin.icon_image', ''); ?>
                 @if($admin_logo_img == '')
                     <img src="{{ voyager_asset('images/logo-icon-light.png') }}" alt="logo" class="logo-default" />

@@ -88,7 +88,7 @@ class MemberController extends Controller
     {
         $m = Member::where('id', $id)->firstOrFail();
         if (is_null(request('avatar'))) {
-            $m->image = config('voyager.user.default_avatar', 'users/default.png');
+            //$m->image = config('voyager.user.default_avatar', 'users/default.png');
         }
         else {
           $m->image = $this->personi_avatar( request('avatar') );
@@ -100,7 +100,8 @@ class MemberController extends Controller
 
 
         Session::flash('flash_message', 'Anëtari u ndryshua me sukses.');
-        return View('member.anetaret', compact('m', $m) );
+        return redirect('anetaret');
+        //return View('member.anetaret', compact('m', $m) );
     }
 
     /**
@@ -111,7 +112,10 @@ class MemberController extends Controller
      */
     public function destroy($id)
     {
-        //
+      Member::findorFail($id)->delete();
+
+      Session::flash('flash_message', 'Anëtari u fshij me sukses.');
+      return redirect('anetaret');
     }
 
     public function personi_avatar($image)
