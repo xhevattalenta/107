@@ -2,6 +2,9 @@
 use TCG\Voyager\Models\Post;
 use App\Member;
 
+$user_role = Voyager::model('User')->find( Auth::id() )->role_id;
+$role = Voyager::model('Role')->find($user_role)->name;
+
 $inputs  = App\Input::all();
 $outputs = App\Output::all();
 
@@ -206,7 +209,9 @@ $total_arka   = $total_input - $total_output;
                                     <th> DETAJET </th>
                                     <th style="min-width:90px;"> VLERA </th>
                                     <th style="min-width:90px;"> DATA </th>
+                                    @if ($role == 'admin' || $role == 'subadmin')
                                     <th style="min-width:100px;"> NDRYSHIME </th>
+                                    @endif
                                 </tr>
                             </thead>
                             @foreach ($inputs as $key => $input)
@@ -224,6 +229,7 @@ $total_arka   = $total_input - $total_output;
                                     <td>
                                         <span class="bold theme-font"> {{ date("d-m-Y", strtotime($input->data) ) }} </span>
                                     </td>
+                                    @if ($role == 'admin' || $role == 'subadmin')
                                     <td>
                                       <a href="/hyrje/{{$input->id}}/edit" class="btn btn-icon-only blue" style="float: left;">
                                           <i class="fa fa-edit"></i>
@@ -235,6 +241,7 @@ $total_arka   = $total_input - $total_output;
                                       </form>
 
                                     </td>
+                                    @endif
                                 </tr>
                               @endif
                             @endforeach
@@ -290,7 +297,9 @@ $total_arka   = $total_input - $total_output;
                                     <th> DETAJET </th>
                                     <th style="min-width:90px;"> VLERA </th>
                                     <th style="min-width:90px;"> DATA </th>
+                                    @if ($role == 'admin' || $role == 'subadmin')
                                     <th style="min-width:100px;"> NDRYSHIME </th>
+                                    @endif
                                 </tr>
                             </thead>
                             @foreach ($outputs as $key => $output)
@@ -301,6 +310,7 @@ $total_arka   = $total_input - $total_output;
                                     <td width="25%">
                                         <span class="bold theme-font"> {{ date("d-m-Y", strtotime($output->data) ) }} </span>
                                     </td>
+                                    @if ($role == 'admin' || $role == 'subadmin')
                                     <td>
                                       <a href="/dalje/{{$output->id}}/edit" class="btn btn-icon-only blue" style="float: left;">
                                           <i class="fa fa-edit"></i>
@@ -312,6 +322,7 @@ $total_arka   = $total_input - $total_output;
                                       </form>
 
                                     </td>
+                                    @endif
                                 </tr>
                               @endif
                             @endforeach

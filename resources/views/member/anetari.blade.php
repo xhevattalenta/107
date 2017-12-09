@@ -3,6 +3,9 @@ use App\Member;
 use App\Input;
 $member = $m;
 
+$user_role = Voyager::model('User')->find( Auth::id() )->role_id;
+$role = Voyager::model('Role')->find($user_role)->name;
+
 $years  = [2017,2018];
 $inputs = App\Input::where('member_id', $m->id)->get();
 $inputs_total = $inputs->sum('vlera');
@@ -147,7 +150,9 @@ $input_data = array(
                                                     <th> Përshkrimi </th>
                                                     <th> Vlera </th>
                                                     <th> Data </th>
+                                                    @if ($role == 'admin' || $role == 'subadmin')
                                                     <th style="min-width:100px;"> NDRYSHIME </th>
+                                                    @endif
                                                 </tr>
                                             </thead>
                                             @foreach ($inputs as $key => $input)
@@ -157,6 +162,7 @@ $input_data = array(
                                                     <td>{{ $input->details }}</td>
                                                     <td>{{ ($input->vlera == '') ? '-' : $input->vlera . ' den' }}</td>
                                                     <td>{{ date("d-m-Y", strtotime($input->data) ) }}</td>
+                                                    @if ($role == 'admin' || $role == 'subadmin')
                                                     <td>
                                                       <a href="/hyrje/{{$input->id}}/edit" class="btn btn-icon-only blue" style="float: left;">
                                                           <i class="fa fa-edit"></i>
@@ -168,6 +174,7 @@ $input_data = array(
                                                       </form>
 
                                                     </td>
+                                                    @endif
                                                 </tr>
                                               @endif
                                             @endforeach
