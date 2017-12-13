@@ -233,14 +233,23 @@ $total_arka   = $total_input - $total_output;
                           <tbody>
                           @foreach ($inputs as $key => $input)
                             @if ( date( 'Y', strtotime( $input->data ) ) == $year)
-                              <?php $member = Member::where('id', $input->member_id)->firstOrFail() ?>
+
+                              <?php $member = Member::where('id', $input->member_id)->first() ?>
                               <tr>
-                                  <td class="fit">
-                                      <img class="user-pic" src="{{ Voyager::image( $member->image ) }}">
-                                      <a href="/anetar/{{ $member->id }}" class="primary-link" style="display:block;">
-                                        {{ $member->name }}
-                                      </a>
-                                  </td>
+                                  @if ( $member )
+                                    <td class="fit">
+                                        <img class="user-pic" src="{{ Voyager::image( $member->image ) }}">
+                                        <a href="/anetar/{{ $member->id }}" class="primary-link" style="display:block;">
+                                          {{ $member->name }}
+                                        </a>
+                                    </td>
+                                  @else
+                                    <td class="fit">
+                                        <img class="user-pic" src="{{ Voyager::image( 'users/default.png' ) }}">
+                                        <span style="display:block;">Anonim</span>
+                                    </td>
+                                  @endif
+
                                   <td> {{ ($input->kontributi == 'a') ? "Anëtarsim" : "Kontribut" }} </td>
                                   <td> {{ ($input->menyra == 'k') ? "Kesh" : "Material" }} </td>
                                   <td> {{ $input->details }} </td>
@@ -383,7 +392,7 @@ $total_arka   = $total_input - $total_output;
             position: 'absolute',
             display: 'none',
             top: y - 40,
-            left: x - 60,
+            left: x - 80,
             border: '0px solid #ccc',
             padding: '2px 6px',
             'background-color': '#fff'
@@ -406,6 +415,7 @@ $total_arka   = $total_input - $total_output;
               ['10/{{$year}}', {{ getTotalByMonth($inputs_data_kesh, $year,10) }}],
               ['11/{{$year}}', {{ getTotalByMonth($inputs_data_kesh, $year,11) }}],
               ['12/{{$year}}', {{ getTotalByMonth($inputs_data_kesh, $year,12) }}]
+              ['12/{{$year}}', {{ getTotalByMonth($inputs_data_kesh, $year,12) }}]
           ];
           var data_materiale = [
               ['01/{{$year}}', {{ getTotalByMonth($inputs_data_materiale, $year,1) }}],
@@ -419,6 +429,7 @@ $total_arka   = $total_input - $total_output;
               ['09/{{$year}}', {{ getTotalByMonth($inputs_data_materiale, $year,9) }}],
               ['10/{{$year}}', {{ getTotalByMonth($inputs_data_materiale, $year,10) }}],
               ['11/{{$year}}', {{ getTotalByMonth($inputs_data_materiale, $year,11) }}],
+              ['12/{{$year}}', {{ getTotalByMonth($inputs_data_materiale, $year,12) }}]
               ['12/{{$year}}', {{ getTotalByMonth($inputs_data_materiale, $year,12) }}]
           ];
 

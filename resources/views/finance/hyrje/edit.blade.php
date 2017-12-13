@@ -59,12 +59,19 @@ $member = App\Member::where('id', $i->member_id)->firstOrFail();
                           <div class="form-group">
                               <label class="control-label col-md-3">Kontributi</label>
                               <div class="col-md-4">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
-                                    </span>
-                                    <input type="text" name="kontributi" class="form-control" placeholder="Kontributi" value="{{ $input->kontributi }}" required>
-                                </div>
+                                  <select name="kontributi" class="bs-select form-control" data-size="2" required>
+                                      <option {{ ($input->kontributi == 'a') ? 'selected' : '' }} value="a">Anëtarsim</option>
+                                      <option {{ ($input->kontributi == 'k') ? 'selected' : '' }} value="k">Kontribut</option>
+                                  </select>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="control-label col-md-3">Mënyra</label>
+                              <div class="col-md-4">
+                                  <select name="menyra" class="bs-select form-control" data-size="2" required>
+                                      <option {{ ($input->menyra == 'k') ? 'selected' : '' }} value="k">Kesh</option>
+                                      <option {{ ($input->menyra == 'm') ? 'selected' : '' }} value="m">Material</option>
+                                  </select>
                               </div>
                           </div>
                           <div class="form-group">
