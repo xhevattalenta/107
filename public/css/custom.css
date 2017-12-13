@@ -33,3 +33,12 @@
   display: flex;
   flex-wrap: wrap;
 }
+div.DTS tbody th, div.DTS tbody td {
+    white-space: normal;
+}
+.dataTables_wrapper .dt-buttons {
+  float: left;
+}
+td.fit {
+  text-align: center;
+}

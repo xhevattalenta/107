@@ -8,9 +8,16 @@ $role = Voyager::model('Role')->find($user_role)->name;
 
 $years  = [2017,2018];
 $inputs = App\Input::where('member_id', $m->id)->get();
-$inputs_total = $inputs->sum('vlera');
-$inputs_data = App\Input::where('member_id', $m->id)
+$inputs_total_kesh = $inputs->where('menyra','k')->sum('vlera');
+$inputs_total_materiale = $inputs->where('menyra','m')->sum('vlera');
+$inputs_data_kesh = App\Input::where('member_id', $m->id)
 ->select(DB::raw('sum(vlera) as `vlera`'), DB::raw("DATE_FORMAT(data, '%m-%Y') new_date"),  DB::raw('YEAR(data) year, MONTH(data) month'))
+->where('menyra','k')
+->groupby('year','month')
+->get();
+$inputs_data_materiale = App\Input::where('member_id', $m->id)
+->select(DB::raw('sum(vlera) as `vlera`'), DB::raw("DATE_FORMAT(data, '%m-%Y') new_date"),  DB::raw('YEAR(data) year, MONTH(data) month'))
+->where('menyra','m')
 ->groupby('year','month')
 ->get();
 
@@ -63,6 +70,10 @@ $input_data = array(
   <!-- BEGIN PAGE LAYOUT STYLES -->
   <link href="{!! asset('assets/pages/css/profile.min.css') !!}" rel="stylesheet" type="text/css" />
   <!-- END PAGE LAYOUT STYLES -->
+  <!-- BEGIN PAGE LEVEL PLUGINS -->
+  <link href="{!! asset('assets/global/plugins/datatables/datatables.min.css') !!}" rel="stylesheet" type="text/css" />
+  <link href="{!! asset('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css') !!}" rel="stylesheet" type="text/css" />
+  <!-- END PAGE LEVEL PLUGINS -->
 @endsection
 
 @section('title', 'Anëtar')
@@ -90,7 +101,9 @@ $input_data = array(
                     <div class="profile-usertitle-name"> {{ $member->name }} </div>
                     <div class="profile-usertitle-job"> {{ $member->tel }} </div>
                     <br><br>
-                    <div class="profile-usertitle-job">Totali:<h2><strong> {{$inputs_total }} den </strong><h2></div>
+                    <div class="profile-usertitle-job">Total Kesh:<h2><strong> {{$inputs_total_kesh }} den </strong><h2></div>
+                    <br><br>
+                    <div class="profile-usertitle-job">Total Materiale:<h2><strong> {{$inputs_total_materiale }} den </strong><h2></div>
                 </div>
                 <!-- END SIDEBAR USER TITLE -->
                 <!-- SIDEBAR MENU -->
@@ -128,58 +141,67 @@ $input_data = array(
                           <div class="tab-content">
                             @foreach ($years as $key => $year)
                               <div class="tab-pane {{ ($key==0) ? 'active' : '' }}" id="portlet_tab_{{$year}}">
-                                  <div class="scroller" style="height: 400px;">
+                                  <div class="scroller" style="height: 590px;">
                                     <div class="row number-stats margin-bottom-30">
                                         <div class="col-md-12">
-                                            <div class="stat-left">
+                                            <div class="stat-left note">
                                                 <div class="stat-chart">
                                                     <div id="sparkline_bar_{{$year}}"></div>
                                                 </div>
                                                 <div class="stat-number">
-                                                    <div class="title"> Total </div>
-                                                    <div class="number"> {{getTotalByYear($inputs_data, $year)}} den </div>
+                                                    <div class="title"> Total Kesh </div>
+                                                    <div class="number"> {{getTotalByYear($inputs_data_kesh, $year)}} den </div>
+                                                </div>
+                                            </div>
+                                            <div class="stat-left note">
+                                                <div class="stat-number">
+                                                    <div class="title"> Total Materiale </div>
+                                                    <div class="number"> {{getTotalByYear($inputs_data_materiale, $year)}} den </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="table-scrollable table-scrollable-borderless">
-                                        <table class="table table-hover table-light">
-                                            <thead>
-                                                <tr class="uppercase">
-                                                    <th> Kontributi </th>
-                                                    <th> Përshkrimi </th>
-                                                    <th> Vlera </th>
-                                                    <th> Data </th>
-                                                    @if ($role == 'admin' || $role == 'subadmin')
-                                                    <th style="min-width:100px;"> NDRYSHIME </th>
-                                                    @endif
-                                                </tr>
-                                            </thead>
-                                            @foreach ($inputs as $key => $input)
-                                              @if ( date( 'Y', strtotime( $input->data ) ) == $year)
-                                                <tr>
-                                                    <td>{{ $input->kontributi }}</td>
-                                                    <td>{{ $input->details }}</td>
-                                                    <td>{{ ($input->vlera == '') ? '-' : $input->vlera . ' den' }}</td>
-                                                    <td>{{ date("d-m-Y", strtotime($input->data) ) }}</td>
-                                                    @if ($role == 'admin' || $role == 'subadmin')
-                                                    <td>
-                                                      <a href="/hyrje/{{$input->id}}/edit" class="btn btn-icon-only blue" style="float: left;">
-                                                          <i class="fa fa-edit"></i>
-                                                      </a>
-                                                      <form action="/hyrje/{{$input->id}}" method="post">
-                                                        {{ csrf_field() }}
-                                                        <input name="_method" type="hidden" value="DELETE">
-                                                        <button type="submit" class="btn btn-icon-only red"><i class="fa fa-times"></i></button>
-                                                      </form>
-
-                                                    </td>
-                                                    @endif
-                                                </tr>
-                                              @endif
-                                            @endforeach
-                                        </table>
-                                    </div>
+                                    <table class="table table-striped table-light table-bordered table-hover order-column table_member" width="100%">
+                                        <thead>
+                                            <tr class="uppercase">
+                                                <th> KONTRIBUTI </th>
+                                                <th> Mënyra </th>
+                                                <th class="webix_hcell"> DETAJET </th>
+                                                <th> VLERA </th>
+                                                <th> DATA </th>
+                                                <th>
+                                                  @if ($role == 'admin' || $role == 'subadmin')
+                                                  NDRYSHIME
+                                                  @endif
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        @foreach ($inputs as $key => $input)
+                                          @if ( date( 'Y', strtotime( $input->data ) ) == $year)
+                                            <tr>
+                                                <td> {{ ($input->kontributi == 'a') ? "Anëtarsim" : "Kontribut" }} </td>
+                                                <td> {{ ($input->menyra == 'k') ? "Kesh" : "Material" }} </td>
+                                                <td> {{ $input->details }} </td>
+                                                <td>{{ ($input->vlera == '') ? '-' : $input->vlera . ' ' }}</td>
+                                                <td>
+                                                    <span class="bold theme-font"> {{ date("d-m-Y", strtotime($input->data) ) }} </span>
+                                                </td>
+                                                <td>
+                                                  @if ($role == 'admin' || $role == 'subadmin')
+                                                  <a href="/hyrje/{{$input->id}}/edit" class="btn btn-icon-only blue" style="float: left;">
+                                                      <i class="fa fa-edit"></i>
+                                                  </a>
+                                                  <form action="/hyrje/{{$input->id}}" method="post">
+                                                    {{ csrf_field() }}
+                                                    <input name="_method" type="hidden" value="DELETE">
+                                                    <button type="submit" class="btn btn-icon-only red"><i class="fa fa-times"></i></button>
+                                                  </form>
+                                                  @endif
+                                                </td>
+                                            </tr>
+                                          @endif
+                                        @endforeach
+                                    </table>
                                   </div>
                               </div>
                             @endforeach
@@ -201,6 +223,12 @@ $input_data = array(
   <!-- BEGIN PAGE LEVEL SCRIPTS -->
   <script src="{!! asset('assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') !!}" type="text/javascript"></script>
   <script src="{!! asset('assets/pages/scripts/components-date-time-pickers.min.js') !!}" type="text/javascript"></script>
+  <!-- END PAGE LEVEL SCRIPTS -->
+  <!-- BEGIN PAGE LEVEL SCRIPTS -->
+  <script src="{!! asset('assets/global/scripts/datatable.js') !!}" type="text/javascript"></script>
+  <script src="{!! asset('assets/global/plugins/datatables/datatables.min.js') !!}" type="text/javascript"></script>
+  <script src="{!! asset('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js') !!}" type="text/javascript"></script>
+  <script src="{!! asset('assets/pages/scripts/table-datatables-scroller-member.js') !!}" type="text/javascript"></script>
   <!-- END PAGE LEVEL SCRIPTS -->
   <script type="text/javascript">
     var Profile = function() {
@@ -246,7 +274,7 @@ $input_data = array(
                     @php
                       $bar = array();
                       for ($m=1; $m<=12; $m++) {
-                        array_push( $bar, getTotalByMonth($inputs_data, $year, $m) );
+                        array_push( $bar, getTotalByMonth($inputs_data_kesh, $year, $m) );
                       }
                       echo json_encode($bar);
                     @endphp

@@ -59,12 +59,19 @@ $members = Member::all();
                           <div class="form-group">
                               <label class="control-label col-md-3">Kontributi</label>
                               <div class="col-md-4">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
-                                    </span>
-                                    <input type="text" name="kontributi" class="form-control" placeholder="Kontributi" required>
-                                </div>
+                                  <select name="kontributi" class="bs-select form-control" data-size="2" required>
+                                      <option value="a">Anëtarsim</option>
+                                      <option value="k">Kontribut</option>
+                                  </select>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="control-label col-md-3">Mënyra</label>
+                              <div class="col-md-4">
+                                  <select name="menyra" class="bs-select form-control" data-size="2" required>
+                                      <option value="k">Kesh</option>
+                                      <option value="m">Material</option>
+                                  </select>
                               </div>
                           </div>
                           <div class="form-group">
@@ -72,7 +79,7 @@ $members = Member::all();
                               <div class="col-md-4">
                                 <div class="input-group">
                                     <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-edit"></i>
                                     </span>
                                     <textarea name="detaje" rows="4" cols="80" class="form-control" placeholder="Detajet"></textarea>
                                 </div>
@@ -83,9 +90,9 @@ $members = Member::all();
                               <div class="col-md-4">
                                 <div class="input-group">
                                     <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-diamond"></i>
                                     </span>
-                                    <input type="number" name="vlera" class="form-control">
+                                    <input type="number" name="vlera" class="form-control" required>
                                 </div>
                               </div>
                           </div>

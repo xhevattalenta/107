@@ -8,7 +8,7 @@ $role = Voyager::model('Role')->find($user_role)->name;
 $inputs  = App\Input::all();
 $outputs = App\Output::all();
 
-$years  = [2017,2018];
+$years  = [2017,2018,2019];
 $inputs_data = DB::table('inputs')
 ->select(DB::raw('sum(vlera) as `vlera`'), DB::raw("DATE_FORMAT(data, '%m-%Y') new_date"),  DB::raw('YEAR(data) year, MONTH(data) month'))
 ->groupby('year','month')

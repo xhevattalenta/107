@@ -41,13 +41,14 @@ class InputController extends Controller
         $i = new Input;
         $i->member_id = request('member');
         $i->kontributi = request('kontributi');
+        $i->menyra = request('menyra');
         $i->details = request('detaje');
         $i->vlera = request('vlera');
         $i->data = date("Y-m-d H:i:s", strtotime( request('data') ));
         $i->save();
 
         Session::flash('flash_message', 'Hyrja u ruajt me sukses.');
-        return View('finance.hyrje.create', compact('m', $m) );
+        return View('finance.hyrje.create', compact('m', $i) );
     }
 
     /**

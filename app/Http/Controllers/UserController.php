@@ -61,7 +61,7 @@ class UserController extends Controller
 
     public function financat()
     {
-        return Voyager::view('user.financat');
+        return Voyager::view('finance.financat');
     }
 
 }
